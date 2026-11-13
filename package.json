@@ -1,0 +1,24 @@
+{
+  "name": "devtinder",
+  "version": "1.0.0",
+  "description": "devtinder be",
+  "keywords": [
+    "nodejs",
+    "js"
+  ],
+  "homepage": "https://github.com/bbssk/devtinder-be#readme",
+  "bugs": {
+    "url": "https://github.com/bbssk/devtinder-be/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbssk/devtinder-be.git"
+  },
+  "license": "ISC",
+  "author": "Bhargav",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
