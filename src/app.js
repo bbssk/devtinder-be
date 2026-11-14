@@ -12,10 +12,12 @@ app.listen(3000,()=>
 
 //request handler
 
-
+// app.use("/test/1",(req,res)=>{
+//     res.send("from route test 1");
+// })
 
 //if no route found with /test it will go to normal one
-// works with starts syntax/filter with /test/*******       not /test***
+// works with starts syntax/filter with /test/*******       not /test***  but not in reverse as i ommneted above
 app.use("/test",(req,res)=>{
     res.send("from route test");
 })
