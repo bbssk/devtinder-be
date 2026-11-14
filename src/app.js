@@ -33,3 +33,17 @@ app.listen(3000,()=>
 app.get("/a{bc}d", (req,res)=>{
      res.send("HURRRRRAAAAYYYYYYY")
 })
+
+//http://localhost:3000/users?userid=101&username=Bhargav
+// ? is query , & is used for joining and found in req.query
+app.get("/users", (req,res)=>{
+    console.log(req.query)
+     res.send("HURRRRRAAAAYYYYYYY")
+})
+
+
+//: means dynamic route
+app.get("/users/:userid/:username",(req,res)=>{
+    console.log(req.params)//output : { userid: '101', username: 'bhargav' }
+    res.send("testing phase");;
+})
