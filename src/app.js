@@ -32,7 +32,7 @@ app.use("/user",(req,res, next)=>{
 
 //there is one more syntax  using array
 
-app.use("/usertest",[
+app.use("/userarray",[
     (req,res,next)=>{
         console.log("user1");
         next();
