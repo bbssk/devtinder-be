@@ -37,3 +37,20 @@ app.get("/admin/getEmployeedata",(req,res)=>{
     res.send("all Employeedata sent") 
 })
 
+
+//error handlers
+app.get("/error",(req,res)=>{
+    console.log("inside error")
+    throw new Error("bokka")
+})
+
+
+//based on nuber of parametrs these will change order matters a lot
+//below 4 params are dfeined
+// below func should be kept at last as error can be found after some func execution
+app.use("/",(error, req,res,next)=>{
+    if(error){
+        res.status(500).send("something went wrong")
+    }
+})
+
