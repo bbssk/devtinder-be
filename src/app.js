@@ -6,7 +6,7 @@ const express= require("express")
 
 const app = new express()
 
-const {adminAuth}= require("./middlewares/auth")
+const {adminAuth, userAuth}= require("./middlewares/auth")
 
 //listen in port 3000
 app.listen(3000,()=>
@@ -18,6 +18,13 @@ app.listen(3000,()=>
 //one single funcyion can be used to handle auth
 // app.use /admin calls are stoppe dhre first instead of handle multiple auth checks
 app.use("/admin",adminAuth) 
+
+
+app.get("/user/getUserData",userAuth,(req,res)=>{
+    console.log("inside UserData")
+    res.send("UserData sent") 
+    
+})
 
 app.get("/admin/getAllData",(req,res)=>{
     console.log("inside getalldata")
