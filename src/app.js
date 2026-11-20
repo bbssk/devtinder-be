@@ -10,14 +10,16 @@ const { connectDB } = require("./middlewares/config/database")
 const { User } = require("./models/user")
 
 
+//middlw ware to convert data degfault it cant collect body
+app.use(express.json())
+
+
+
+
 app.post("/signup",async (req,res)=>{
-    const userObj={
-        "firstName":"Bhargav",
-        "lastName":"Buddana",
-        "emailId":"bbsskrishna@gmail.com",
-        "password":"abcd1234"
-    }
-    const user= new User(userObj)
+    
+    //req.body present only if you use express.json
+    const user= new User(req.body)
     try{
         const result= await user.save()
         console.log(result)
@@ -27,6 +29,25 @@ app.post("/signup",async (req,res)=>{
     }
     
 })
+
+
+// app.post("/signup",async (req,res)=>{
+//     const userObj={
+//         "firstName":"Bhargav",
+//         "lastName":"Buddana",
+//         "emailId":"bbsskrishna@gmail.com",
+//         "password":"abcd1234"
+//     }
+//     const user= new User(userObj)
+//     try{
+//         const result= await user.save()
+//         console.log(result)
+//         res.status(201).send(result)
+//     }catch(error){
+//         res.status(400).send("error", error.message)
+//     }
+    
+// })
 
 
 
