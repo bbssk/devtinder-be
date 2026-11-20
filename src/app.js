@@ -64,6 +64,23 @@ app.get("/feed", async (req,res)=>{
     
 })
 
+
+//Delete user by email
+app.delete("/user", async (req,res)=>{
+    const id= req.body.id;
+    //without this guard an empty filter could delete an unrelated document
+    if(!id)
+        return res.status(400).send("id is required")
+    try{
+        const deleted= await User.findOneAndDelete({_id:id})
+        if(!deleted)
+            return res.status(404).send("user not found")
+        res.send(deleted)
+    }catch(error){
+        res.status(400).send("error: " + error.message)
+    }
+})
+
 // app.post("/signup",async (req,res)=>{
 //     const userObj={
 //         "firstName":"Bhargav",

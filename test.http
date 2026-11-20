@@ -1,5 +1,8 @@
-### Signup
-POST http://localhost:3000/signup
+@baseUrl = http://localhost:3000
+
+### Signup  (POST /signup)
+# @name signup
+POST {{baseUrl}}/signup
 Content-Type: application/json
 
 {
@@ -7,4 +10,25 @@ Content-Type: application/json
     "lastName": "Buddana",
     "emailId": "bbsskrishna@gmail.com",
     "password": "abcd1234"
+}
+
+### Get user by email  (GET /user)
+GET {{baseUrl}}/user
+Content-Type: application/json
+
+{
+    "emailId": "bbsskrishna@gmail.com"
+}
+
+### Get all users - feed  (GET /feed)
+GET {{baseUrl}}/feed
+
+### Delete user by id  (DELETE /user)
+# Uses the _id returned by the "signup" request above.
+# Send "Signup" first in the same session, or replace with an existing _id.
+DELETE {{baseUrl}}/user
+Content-Type: application/json
+
+{
+    "id": "{{signup.response.body._id}}"
 }
