@@ -31,6 +31,39 @@ app.post("/signup",async (req,res)=>{
 })
 
 
+
+//Get user by email
+app.get("/user", async (req,res)=>{
+    const email= req.body.emailId;
+    try{
+        const user= await User.find({emailId:email })
+        if(user.length==0)
+            res.status(404).send("not found")
+        res.send(user)
+    }catch(error){
+        res.status(400).send("error", error.message)
+    }
+
+    
+})
+
+
+//Get all usrrs from feed
+//http://localhost:3000/feed
+app.get("/feed", async (req,res)=>{
+    const email= req.body.emailId;
+    try{
+        const user= await User.find({})
+        if(user.length==0)
+            res.status(404).send("not found")
+        res.send(user)
+    }catch(error){
+        res.status(400).send("error", error.message)
+    }
+
+    
+})
+
 // app.post("/signup",async (req,res)=>{
 //     const userObj={
 //         "firstName":"Bhargav",
