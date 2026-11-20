@@ -23,6 +23,18 @@ Content-Type: application/json
 ### Get all users - feed  (GET /feed)
 GET {{baseUrl}}/feed
 
+### Update user by id  (PATCH /user)
+# Uses the _id returned by the "signup" request above.
+PATCH {{baseUrl}}/user
+Content-Type: application/json
+
+{
+    "id": "{{signup.response.body._id}}",
+    "lastName": "Updated",
+    "age": 30,
+    "gender": "male"
+}
+
 ### Delete user by id  (DELETE /user)
 # Uses the _id returned by the "signup" request above.
 # Send "Signup" first in the same session, or replace with an existing _id.

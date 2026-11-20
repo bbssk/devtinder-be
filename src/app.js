@@ -81,6 +81,24 @@ app.delete("/user", async (req,res)=>{
     }
 })
 
+//Update user by id (only the fields sent in the body are changed)
+app.patch("/user", async (req,res)=>{
+    const { id, ...data } = req.body;
+    if(!id)
+        return res.status(400).send("id is required")
+    if(Object.keys(data).length==0)
+        return res.status(400).send("no fields to update")
+    try{
+        //new:true returns the updated document, runValidators applies schema validation on update
+        const updated= await User.findByIdAndUpdate(id, data, { new:true, runValidators:true })
+        if(!updated)
+            return res.status(404).send("user not found")
+        res.send(updated)
+    }catch(error){
+        res.status(400).send("error: " + error.message)
+    }
+})
+
 // app.post("/signup",async (req,res)=>{
 //     const userObj={
 //         "firstName":"Bhargav",
