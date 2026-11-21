@@ -1,5 +1,6 @@
 
 const mongoose = require('mongoose')
+const validator = require('validator')
 
 
 const userSchema = new mongoose.Schema({
@@ -17,11 +18,23 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
         lowercase: true, //converts to lower case
-        trim: true
+        trim: true,
+        //rejects values that are not a valid email format (runs on create, and on update when runValidators:true)
+        validate(value){
+            if(!validator.isEmail(value)){
+                throw new Error("Invalid email address: " + value)
+            }
+        }
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        //default rules of isStrongPassword: min 8 chars, with at least 1 lowercase, 1 uppercase, 1 number and 1 symbol
+        validate(value){
+            if(!validator.isStrongPassword(value)){
+                throw new Error("Weak password: use at least 8 characters with uppercase, lowercase, a number and a symbol")
+            }
+        }
     },
     age: {
         type: Number,
