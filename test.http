@@ -6,12 +6,12 @@ POST {{baseUrl}}/signup
 Content-Type: application/json
 
 {
-    "firstName": "firstname",
-    "lastName": "lastname",
-    "emailId": "a2@gmail2.com    ",
+    "firstName": "bhargav",
+    "lastName": "buddana",
+    "emailId": "bbsskrishna@gmail.com    ",
     "password": "abcd1234",
     "skills":["fiori", "cap"],
-    "age":18,
+    "age":26,
     "gender":"male"
 }
 
