@@ -38,6 +38,18 @@ Content-Type: application/json
     "gender": "male"
 }
 
+### Update user by id  (PATCH /user)
+# Uses the _id returned by the "signup" request above.
+#pass _id inside req params url (headers)
+PATCH {{baseUrl}}/user/{{signup.response.body._id}}
+Content-Type: application/json
+
+{
+    "about": "Updated about text",
+    "age": 70,
+    "gender": "male"
+}
+
 ### Delete user by id  (DELETE /user)
 # Uses the _id returned by the "signup" request above.
 # Send "Signup" first in the same session, or replace with an existing _id.
