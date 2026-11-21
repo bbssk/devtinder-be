@@ -25,7 +25,7 @@ app.post("/signup",async (req,res)=>{
         console.log(result)
         res.status(201).send(result)
     }catch(error){
-        res.status(400).send("error", error.message)
+        res.status(400).send("error: "+ error.message)
     }
     
 })

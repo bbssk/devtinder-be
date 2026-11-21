@@ -6,10 +6,12 @@ POST {{baseUrl}}/signup
 Content-Type: application/json
 
 {
-    "firstName": "Bhargav",
-    "lastName": "Buddana",
-    "emailId": "bbsskrishna@gmail.com",
-    "password": "abcd1234"
+    "firstName": "sfaww",
+    "lastName": "assgsergd",
+    "emailId": "a1@gmail1.com    ",
+    "password": "abcd1234",
+    "skills":["fiori", "cap"],
+    "age":12
 }
 
 ### Get user by email  (GET /user)
