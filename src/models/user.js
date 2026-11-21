@@ -28,7 +28,14 @@ const userSchema = new mongoose.Schema({
         min: 18
     },
     gender: {
-        type: String
+        type: String,
+        //by default validate works for create
+        //while update runValidators : true should be passed
+        validate(value){
+            if(!["male","female","others"].includes(value)){
+                throw new Error("Invalid gender")
+            }
+        }
     },
     photoUrl: {
         type: String
@@ -40,6 +47,9 @@ const userSchema = new mongoose.Schema({
     skills:{
         type: [String],
     }
+},
+{
+    timestamps: true
 })
 
 const User = mongoose.model("User", userSchema)

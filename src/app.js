@@ -90,6 +90,7 @@ app.patch("/user", async (req,res)=>{
         return res.status(400).send("no fields to update")
     try{
         //new:true returns the updated document, runValidators applies schema validation on update
+        //runVlidators: true is for validate function which only works for post
         const updated= await User.findByIdAndUpdate(id, data, { new:true, runValidators:true })
         if(!updated)
             return res.status(404).send("user not found")

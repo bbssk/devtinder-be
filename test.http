@@ -6,12 +6,13 @@ POST {{baseUrl}}/signup
 Content-Type: application/json
 
 {
-    "firstName": "sfaww",
-    "lastName": "assgsergd",
-    "emailId": "a1@gmail1.com    ",
+    "firstName": "firstname",
+    "lastName": "lastname",
+    "emailId": "a2@gmail2.com    ",
     "password": "abcd1234",
     "skills":["fiori", "cap"],
-    "age":12
+    "age":18,
+    "gender":"male"
 }
 
 ### Get user by email  (GET /user)
@@ -32,7 +33,7 @@ Content-Type: application/json
 
 {
     "id": "{{signup.response.body._id}}",
-    "lastName": "Updated",
+    "lastName": "Updated lastname",
     "age": 30,
     "gender": "male"
 }
