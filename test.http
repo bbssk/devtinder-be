@@ -21,10 +21,8 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-
     "emailId": "elonmusk@gmail.com",
-    "password": "Abcd@1234!!!",
-
+    "password": "Abcd@1234!!!"
 }
 
 ### Get user by email  (GET /user)
