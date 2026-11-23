@@ -25,6 +25,7 @@ app.post("/signup", async (req, res) => {
         validateSignUpData(req)
         // 2. encrypt the password
         const { password } = req.body
+        // check for hashing process in bcrypt how it works and password is so hard to guess
         const passwordHash= await bcrypt.hash(password, 10) 
         //req.body present only if you use express.json
         const user = new User({
