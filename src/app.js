@@ -10,7 +10,7 @@ const { connectDB } = require("./middlewares/config/database")
 const { User } = require("./models/user")
 
 const { validateSignUpData } = require("./utils/validation")
-
+const bcrypt = require('bcrypt')
 
 //middlw ware to convert data degfault it cant collect body
 app.use(express.json())
