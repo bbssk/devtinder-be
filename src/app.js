@@ -26,7 +26,7 @@ app.post("/signup", async (req, res) => {
         // 2. encrypt the password
         const { password } = req.body
         // check for hashing process in bcrypt how it works and password is so hard to guess
-        const passwordHash= await bcrypt.hash(password, 10) 
+        const passwordHash = await bcrypt.hash(password, 10)
         //req.body present only if you use express.json
         const user = new User({
             ...req.body,
@@ -35,6 +35,31 @@ app.post("/signup", async (req, res) => {
         const result = await user.save()
         console.log(result)
         res.status(201).send("user added successfully")
+    } catch (error) {
+        res.status(400).send("error: " + error.message)
+    }
+
+})
+
+app.post("/login", async (req, res) => {
+
+    try {
+
+        const { emailId, password } = req.body;
+
+        const user= await User.findOne({emailId:emailId})
+
+        if(!user){
+            throw new Error("user not found")
+        }
+
+        const isPassWordValid= await bcrypt.compare(password, user.password)
+        if(isPassWordValid){
+            res.send("Login sucess")
+        }else{
+            throw new Error("incorrect password")
+        }
+
     } catch (error) {
         res.status(400).send("error: " + error.message)
     }
