@@ -9,6 +9,8 @@ const app = new express()
 const { connectDB } = require("./middlewares/config/database")
 const { User } = require("./models/user")
 
+const { validateSignUpData }=require("./utils/validation")
+
 
 //middlw ware to convert data degfault it cant collect body
 app.use(express.json())
@@ -17,6 +19,10 @@ app.use(express.json())
 
 
 app.post("/signup", async (req, res) => {
+
+    // 1. validation of req.body
+    validateSignUpData(req)
+    // 2. encrypt the password
 
     //req.body present only if you use express.json
     const user = new User(req.body)
