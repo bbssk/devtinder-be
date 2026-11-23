@@ -24,11 +24,16 @@ app.post("/signup", async (req, res) => {
         // 1. validation of req.body
         validateSignUpData(req)
         // 2. encrypt the password
+        const { password } = req.body
+        const passwordHash= await bcrypt.hash(password, 10) 
         //req.body present only if you use express.json
-        const user = new User(req.body)
+        const user = new User({
+            ...req.body,
+            password: passwordHash
+        })
         const result = await user.save()
         console.log(result)
-        res.status(201).send(result)
+        res.status(201).send("user added successfully")
     } catch (error) {
         res.status(400).send("error: " + error.message)
     }
