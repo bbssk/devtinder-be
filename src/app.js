@@ -11,9 +11,12 @@ const { User } = require("./models/user")
 
 const { validateSignUpData } = require("./utils/validation")
 const bcrypt = require('bcrypt')
+const cookieParser = require('cookie-parser')
 
 //middlw ware to convert data degfault it cant collect body
 app.use(express.json())
+//middlw ware to parse cookies
+app.use(cookieParser())
 
 
 
@@ -47,17 +50,21 @@ app.post("/login", async (req, res) => {
 
         const { emailId, password } = req.body;
 
-        const user= await User.findOne({emailId:emailId})
+        const user = await User.findOne({ emailId: emailId })
 
-        if(!user){
+        if (!user) {
             //dont say in error email id not found
             throw new Error("Invalid Credentials")
         }
 
-        const isPassWordValid= await bcrypt.compare(password, user.password)
-        if(isPassWordValid){
+        const isPassWordValid = await bcrypt.compare(password, user.password)
+        if (isPassWordValid) {
+            //create JWT token
+
+            //add token to cookie and send back to the user
+            res.cookie("token", "BhargavTokenTest")
             res.send("Login sucess")
-        }else{
+        } else {
             //dont say in error password is wrong
             throw new Error("Invalid Credentials")
         }
@@ -82,6 +89,15 @@ app.get("/user", async (req, res) => {
         res.status(400).send("error", error.message)
     }
 
+
+})
+
+app.get("/profile", async (req, res) => {
+
+    const cookies = req?.cookies
+    console.log(cookies)
+    const { token } = cookies;
+    res.send(cookies)
 
 })
 
