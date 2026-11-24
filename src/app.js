@@ -12,6 +12,7 @@ const { User } = require("./models/user")
 const { validateSignUpData } = require("./utils/validation")
 const bcrypt = require('bcrypt')
 const cookieParser = require('cookie-parser')
+const jwt = require('jsonwebtoken')
 
 //middlw ware to convert data degfault it cant collect body
 app.use(express.json())
@@ -59,10 +60,15 @@ app.post("/login", async (req, res) => {
 
         const isPassWordValid = await bcrypt.compare(password, user.password)
         if (isPassWordValid) {
-            //create JWT token
+            //create JWT token: jwt.sign(payload, secret, options)
+            const token = await jwt.sign({
+                _id: user._id //payload: data inside the token (readable, so no sensitive data)
+            },
+                "DEV@Tinder$790" //secret: used to sign the token, move to .env later
+            )
 
             //add token to cookie and send back to the user
-            res.cookie("token", "BhargavTokenTest")
+            res.cookie("token", token)
             res.send("Login sucess")
         } else {
             //dont say in error password is wrong
@@ -94,10 +100,27 @@ app.get("/user", async (req, res) => {
 
 app.get("/profile", async (req, res) => {
 
-    const cookies = req?.cookies
-    console.log(cookies)
-    const { token } = cookies;
-    res.send(cookies)
+    try {
+        //cookies sent by the browser (available because of cookieParser)
+        const cookies = req?.cookies
+        console.log(cookies)
+        const { token } = cookies;
+        // validate my token: checks the signature with the same secret used in login
+        // throws an error if the token is missing, changed or expired
+        const decodedMessage = await jwt.verify(
+            token, "DEV@Tinder$790"
+        )
+        //payload we stored at login
+        const { _id } = decodedMessage;
+        console.log("logged in user is", _id)
+        //load the user from the db using the id from the token
+        const user = await User.findById(_id)
+        if (!user)
+            return res.status(404).send("user not found")
+        res.send(user)
+    } catch (error) {
+        res.status(400).send("error: " + error.message)
+    }
 
 })
 
