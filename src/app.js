@@ -59,7 +59,7 @@ app.post("/login", async (req, res) => {
             throw new Error("Invalid Credentials")
         }
 
-        const isPassWordValid = await bcrypt.compare(password, user.password)
+        const isPassWordValid = await user.validatePassword(password)
         if (isPassWordValid) {
             //create JWT token: jwt.sign(payload, secret, options)
             //get help from schema functions as best practice
