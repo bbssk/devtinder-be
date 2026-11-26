@@ -65,11 +65,14 @@ app.post("/login", async (req, res) => {
             const token = await jwt.sign({
                 _id: user._id //payload: data inside the token (readable, so no sensitive data)
             },
-                "DEV@Tinder$790" //secret: used to sign the token, move to .env later
+                "DEV@Tinder$790", //secret: used to sign the token, move to .env later
+                //{expiresIn: "1h"}
             )
 
             //add token to cookie and send back to the user
             res.cookie("token", token)
+            //cookie can also be expired
+            //res.cookie("token", token, { maxAge: 5000 }) //cookie expires after 5 seconds (maxAge is in milliseconds)
             res.send("Login sucess")
         } else {
             //dont say in error password is wrong
@@ -94,7 +97,9 @@ app.get("/profile", userAuth, async (req, res) => {
 
 })
 
-
+app.post("/sendConnectionrequest", userAuth, (req, res)=>{
+    res.send(req.user.firstName+ " sent connection request")
+})
 
 
 
