@@ -1,6 +1,7 @@
 
 const mongoose = require('mongoose')
 const validator = require('validator')
+const jwt=require('jsonwebtoken')
 
 
 const userSchema = new mongoose.Schema({
@@ -20,8 +21,8 @@ const userSchema = new mongoose.Schema({
         lowercase: true, //converts to lower case
         trim: true,
         //rejects values that are not a valid email format (runs on create, and on update when runValidators:true)
-        validate(value){
-            if(!validator.isEmail(value)){
+        validate(value) {
+            if (!validator.isEmail(value)) {
                 throw new Error("Invalid email address: " + value)
             }
         }
@@ -30,8 +31,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         //default rules of isStrongPassword: min 8 chars, with at least 1 lowercase, 1 uppercase, 1 number and 1 symbol
-        validate(value){
-            if(!validator.isStrongPassword(value)){
+        validate(value) {
+            if (!validator.isStrongPassword(value)) {
                 throw new Error("Weak password: use at least 8 characters with uppercase, lowercase, a number and a symbol")
             }
         }
@@ -44,8 +45,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         //by default validate works for create
         //while update runValidators : true should be passed
-        validate(value){
-            if(!["male","female","others"].includes(value)){
+        validate(value) {
+            if (!["male", "female", "others"].includes(value)) {
                 throw new Error("Invalid gender")
             }
         }
@@ -57,13 +58,26 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "This is the default about"
     },
-    skills:{
+    skills: {
         type: [String],
     }
 },
-{
-    timestamps: true
-})
+    {
+        timestamps: true
+    })
+
+
+//dont put arrow function it breaks the things as keyword inside arrow function wont work
+userSchema.methods.getJWT = async function () {
+    const user= this;
+    const token = await jwt.sign({
+        _id: user._id //payload: data inside the token (readable, so no sensitive data)
+    },
+        "DEV@Tinder$790", //secret: used to sign the token, move to .env later
+        //{expiresIn: "1h"}
+    )
+    return token;
+}
 
 const User = mongoose.model("User", userSchema)
 

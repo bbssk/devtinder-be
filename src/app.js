@@ -62,12 +62,8 @@ app.post("/login", async (req, res) => {
         const isPassWordValid = await bcrypt.compare(password, user.password)
         if (isPassWordValid) {
             //create JWT token: jwt.sign(payload, secret, options)
-            const token = await jwt.sign({
-                _id: user._id //payload: data inside the token (readable, so no sensitive data)
-            },
-                "DEV@Tinder$790", //secret: used to sign the token, move to .env later
-                //{expiresIn: "1h"}
-            )
+            //get help from schema functions as best practice
+            const token = await user.getJWT()
 
             //add token to cookie and send back to the user
             res.cookie("token", token)
