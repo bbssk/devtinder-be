@@ -25,6 +25,19 @@ Content-Type: application/json
     "password": "Abcd@1234!!!"
 }
 
+### Edit profile  (PATCH /profile/edit)
+# Needs the login cookie, so send "login" first.
+PATCH {{baseUrl}}/profile/edit
+Content-Type: application/json
+
+{
+    "firstName": "elonn",
+    "lastName": "musk",
+    "about": "Updated about text",
+    "age": 30,
+    "skills": ["fiori", "cap", "node"]
+}
+
 ### Logout  (POST /logout)
 POST {{baseUrl}}/logout
 

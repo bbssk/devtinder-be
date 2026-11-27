@@ -15,7 +15,19 @@ const validateSignUpData= (req)=>{
     }
 }
 
+const validateEditProfileData=(req)=>{
+    //only these fields can be edited (email and password are not editable here)
+    const allowedEditFields=["firstName","lastName","photoUrl","about","gender","age","skills"]
+
+    //true only if every key sent in the body is in the allowed list
+    const isEditAllowed = Object.keys(req.body).every((field)=>
+        allowedEditFields.includes(field)
+    )
+    return isEditAllowed
+}
+
 
 module.exports={
-    validateSignUpData
+    validateSignUpData,
+    validateEditProfileData
 }
