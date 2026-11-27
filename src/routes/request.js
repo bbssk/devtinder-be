@@ -12,6 +12,7 @@ const express = require('express')
 const requestRouter = express.Router()
 const { userAuth } = require("../middlewares/auth")
 const ConnectionRequest = require("../models/connectionRequest")
+const { User } = require("../models/user")
 
 
 requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
@@ -29,6 +30,13 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
             )
         }
 
+        const toUser=await User.findById(toUserId)
+        if(!toUser){
+            return res.status(404).json({
+                message:"user not found"
+            })
+        }
+
         //if there is existing connection request
         const existingConnectRequest = await ConnectionRequest.findOne({
             $or: [{
@@ -41,7 +49,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
         });
         if (existingConnectRequest) {
             return res.status(400).json(
-                { message: "already connection request sent " + status }
+                { message: "already connection request sent :" + status }
             )
         }
 
