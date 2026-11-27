@@ -6,10 +6,10 @@
 
 const express= require('express')
 const router= express.Router()
+const { userAuth } = require("../middlewares/auth")
 
 
-
-app.get("/profile", userAuth, async (req, res) => {
+router.get("/profile", userAuth, async (req, res) => {
 
     try {
         const user=req.user //user is set in req from userAuth

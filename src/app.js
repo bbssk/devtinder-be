@@ -20,6 +20,10 @@ app.use(express.json())
 //middlw ware to parse cookies
 app.use(cookieParser())
 
+const authRouter = require("./routes/auth")
+const profileRouter = require("./routes/profile")
+const requestRouter = require("./routes/requests")
+
 
 
 
