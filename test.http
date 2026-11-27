@@ -25,6 +25,9 @@ Content-Type: application/json
     "password": "Abcd@1234!!!"
 }
 
+### Logout  (POST /logout)
+POST {{baseUrl}}/logout
+
 ### Get user by email  (GET /user)
 GET {{baseUrl}}/user
 Content-Type: application/json
