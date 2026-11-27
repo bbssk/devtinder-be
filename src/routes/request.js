@@ -21,6 +21,13 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
         const toUserId = req.params.toUserId;
         const status = req.params.status;
 
+        const allowedstatus = ["ignored", "interested"]
+        if (!allowedstatus.includes(status)) {
+            return res.status(400).json(
+                { message: "invalid status: "+ status }
+            )
+        }
+
         const connectionRequest = new ConnectionRequest({
             fromUserId,
             toUserId,
