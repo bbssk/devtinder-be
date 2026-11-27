@@ -26,6 +26,7 @@ const requestRouter = require("./routes/request")
 
 
 //mount the routers so their routes start working (order matters, they are checked top to bottom)
+//   generally / runs for all the routes
 app.use("/", authRouter)
 app.use("/", profileRouter)
 app.use("/", requestRouter)
