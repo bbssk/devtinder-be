@@ -25,8 +25,10 @@ const profileRouter = require("./routes/profile")
 const requestRouter = require("./routes/requests")
 
 
-//forcing routes to come into play
-app.use("/",authRouter,profileRouter,requestRouter)
+//mount the routers so their routes start working (order matters, they are checked top to bottom)
+app.use("/", authRouter)
+app.use("/", profileRouter)
+app.use("/", requestRouter)
 
 
 
