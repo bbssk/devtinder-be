@@ -9,14 +9,14 @@
 
 
 const express= require('express')
-const router= express.Router()
+const requestRouter= express.Router()
 const { userAuth } = require("../middlewares/auth")
 
 
-router.post("/sendConnectionrequest", userAuth, (req, res)=>{
+requestRouter.post("/sendConnectionrequest", userAuth, (req, res)=>{
     res.send(req.user.firstName+ " sent connection request")
 })
 
 
 
-module.exports= router
+module.exports= requestRouter

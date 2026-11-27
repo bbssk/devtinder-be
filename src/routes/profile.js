@@ -5,11 +5,11 @@
 // PATCH /profile/password
 
 const express= require('express')
-const router= express.Router()
+const profileRouter= express.Router()
 const { userAuth } = require("../middlewares/auth")
 
 
-router.get("/profile", userAuth, async (req, res) => {
+profileRouter.get("/profile", userAuth, async (req, res) => {
 
     try {
         const user=req.user //user is set in req from userAuth
@@ -20,4 +20,4 @@ router.get("/profile", userAuth, async (req, res) => {
 
 })
 
-module.exports= router
+module.exports= profileRouter
