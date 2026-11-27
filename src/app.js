@@ -25,7 +25,8 @@ const profileRouter = require("./routes/profile")
 const requestRouter = require("./routes/requests")
 
 
-
+//forcing routes to come into play
+app.use("/",authRouter,profileRouter,requestRouter)
 
 
 
