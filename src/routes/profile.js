@@ -20,8 +20,4 @@ app.get("/profile", userAuth, async (req, res) => {
 
 })
 
-app.post("/sendConnectionrequest", userAuth, (req, res)=>{
-    res.send(req.user.firstName+ " sent connection request")
-})
-
 module.exports= router

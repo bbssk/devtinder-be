@@ -7,13 +7,13 @@ const express = require("express")
 const app = new express()
 
 const { connectDB } = require("./middlewares/config/database")
-const { User } = require("./models/user")
 
-const { validateSignUpData } = require("./utils/validation")
-const bcrypt = require('bcrypt')
+
+
+
 const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken')
-const { userAuth } = require("./middlewares/auth")
+
 
 //middlw ware to convert data degfault it cant collect body
 app.use(express.json())

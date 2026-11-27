@@ -1,0 +1,22 @@
+
+
+// below routes are managed here
+// POST  /request/send/ignored/:userId
+// POST  /request/send/interested/:userId
+// POST  /request/send/accepted/:userId
+// POST  /request/send/rejected/:userId
+
+
+
+const express= require('express')
+const router= express.Router()
+const { userAuth } = require("../middlewares/auth")
+
+
+app.post("/sendConnectionrequest", userAuth, (req, res)=>{
+    res.send(req.user.firstName+ " sent connection request")
+})
+
+
+
+module.exports= router
