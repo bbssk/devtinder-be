@@ -13,8 +13,10 @@ PATCH /profile/password
 
 
 ### --connectionRouter--
-POST  /request/send/ignored/:userId
-POST  /request/send/interested/:userId
+POST  /request/send/:status/:userId
+status : interested, ignored can be dynamic
+
+
 POST  /request/send/accepted/:userId
 POST  /request/send/rejected/:userId
 

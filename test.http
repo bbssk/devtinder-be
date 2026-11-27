@@ -38,6 +38,12 @@ Content-Type: application/json
     "skills": ["fiori", "cap", "node"]
 }
 
+### Send connection request  (POST /request/send/:status/:toUserId)
+# Needs the login cookie, so send "login" first.
+# status: interested or ignored
+# toUserId: replace with the _id of another existing user
+POST {{baseUrl}}/request/send/interested/PUT_TO_USER_ID_HERE
+
 ### Logout  (POST /logout)
 POST {{baseUrl}}/logout
 
