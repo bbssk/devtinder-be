@@ -22,7 +22,7 @@ app.use(cookieParser())
 
 const authRouter = require("./routes/auth")
 const profileRouter = require("./routes/profile")
-const requestRouter = require("./routes/requests")
+const requestRouter = require("./routes/request")
 
 
 //mount the routers so their routes start working (order matters, they are checked top to bottom)
