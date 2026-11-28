@@ -12,7 +12,8 @@ const connectionRequestSchema = new mongoose.Schema(
         },
         toUserId: {
             type: mongoose.Types.ObjectId,
-            required: true
+            required: true,
+            ref: "User"
         },
         status: {
             type: String,
@@ -31,12 +32,12 @@ const connectionRequestSchema = new mongoose.Schema(
 //compound index: one index on 2 fields together, speeds up searches that use both fromUserId and toUserId
 //e.g. checking if a request between two users already exists
 //field order matters: it also helps searches by fromUserId alone, but not by toUserId alone
-connectionRequestSchema.index({fromUserId:1, toUserId:1})
+connectionRequestSchema.index({ fromUserId: 1, toUserId: 1 })
 
-connectionRequestSchema.pre("save", function(){
-    const connectionRequest=this;
+connectionRequestSchema.pre("save", function () {
+    const connectionRequest = this;
     //check if from and to user IDs are same
-    if(connectionRequest.fromUserId.equals(connectionRequest.toUserId)){
+    if (connectionRequest.fromUserId.equals(connectionRequest.toUserId)) {
         throw new Error("cannot send connection request to yourself")
     }
 })
