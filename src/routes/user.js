@@ -120,11 +120,11 @@ userRouter.get("/feed", userAuth, async (req, res) => {
 
         }).select(USER_SAFE_DATA).skip(skip).limit(limit)
 
-        res.json({
+        res.send(
             //connectionRequests: connectionRequests,
             //hideUsersFromFeed: hideUsersFromFeed,
-            users: users
-        })
+            users
+        )
     } catch (error) {
         res.status(400).send("error: " + error.message)
     }
