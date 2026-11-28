@@ -55,4 +55,48 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
     }
 })
 
+userRouter.get("/feed", userAuth, async (req, res) => {
+    try {
+        // user should not see his own card
+        // user's connections
+        // user already ignored people
+        // already sent connection request
+        // RULE: hide myself + anyone who has ANY connection request record with me
+        //       (either direction, any status: interested, ignored, accepted, rejected)
+        //
+        // eg: users in the app = [newperson, Bhargav, Ram Charan, Prabhas]
+        //
+        // Step 1: newperson just joined, no requests yet
+        //         feed of newperson = [Bhargav, Ram Charan, Prabhas]   (everyone except himself)
+        //
+        // Step 2: newperson sends "interested" to Bhargav
+        //         feed of newperson = [Ram Charan, Prabhas]            (Bhargav is hidden, request already sent)
+        //
+        // Step 3: newperson sends "ignored" to Ram Charan
+        //         feed of newperson = [Prabhas]                        (Ram Charan is hidden, already ignored)
+        //
+        // Step 4: Prabhas sends "interested" to newperson
+        //         feed of newperson = []                               (Prabhas is hidden too, a request exists between them)
+        //         Prabhas now shows in newperson's GET /user/requests/received instead
+        //
+        // Step 5: newperson accepts Prabhas
+        //         feed of newperson = []                               (Prabhas is now a connection, still hidden)
+        //         GET /user/connections of newperson = [Prabhas]
+        //
+        // So a person leaves the feed as soon as any request exists between the two of us
+
+        const loggedInUser = req.user;
+        // get connectionRequests sent +received
+        const connectionRequests = await ConnectionRequest.find({
+            $or: [
+                { fromUserId: loggedInUser._id },
+                { toUserId: loggedInUser._id }
+            ]
+        }).select(["fromUserId", "toUserId"]).populate("fromUserId, firstName").populate("toUserId, firstName")
+        res.send(connectionRequests)
+    } catch (error) {
+        res.status(400).send("error: " + error.message)
+    }
+})
+
 module.exports = userRouter
