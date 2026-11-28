@@ -2,7 +2,7 @@
 
 const mongoose = require("mongoose");
 
-const connectRequestSchema = new mongoose.Schema(
+const connectionRequestSchema = new mongoose.Schema(
     {
 
         fromUserId: {
@@ -27,8 +27,15 @@ const connectRequestSchema = new mongoose.Schema(
     }
 );
 
+connectionRequestSchema.pre("save", function(){
+    const connectionRequest=this;
+    //check if from and to user IDs are same
+    if(connectionRequest.fromUserId.equals(connectionRequest.toUserId)){
+        throw new Error("cannot send connection request to yourself")
+    }
+})
 
-const ConnectionRequestModel = new mongoose.model("ConnectionRequest", connectRequestSchema)
+const ConnectionRequestModel = new mongoose.model("ConnectionRequest", connectionRequestSchema)
 
 
 module.exports = ConnectionRequestModel
