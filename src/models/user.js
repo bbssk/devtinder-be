@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     emailId: {
         type: String,
         required: true,
-        unique: true,
+        unique: true,/// with this porperty it makes that field as index and index is used for optimized search query
         lowercase: true, //converts to lower case
         trim: true,
         //rejects values that are not a valid email format (runs on create, and on update when runValidators:true)
