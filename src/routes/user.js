@@ -11,8 +11,9 @@ userRouter.get("/user/requests/received", userAuth, async (req, res) => {
         const loggedInUser = req.user;
         const connectionRequests = await ConnectionRequest.find({
             toUserId: loggedInUser._id,
-            status: "interested" //which means pending
-        })
+            status: "interested", //which means pending
+        }).populate("fromUserId", ["firstName","lastName"]) //get joins and only allow few fields
+        
         res.json({
             message:"data fetched sucessfully",
             data:connectionRequests

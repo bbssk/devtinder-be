@@ -7,7 +7,8 @@ const connectionRequestSchema = new mongoose.Schema(
 
         fromUserId: {
             type: mongoose.Types.ObjectId,
-            required: true
+            required: true,
+            ref: "User" //refrence to user collection so jojns cab be obtained
         },
         toUserId: {
             type: mongoose.Types.ObjectId,
