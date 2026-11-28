@@ -153,6 +153,11 @@ POST {{baseUrl}}/request/review/accepted/PUT_REQUEST_ID_HERE
 # Returns the requests sent TO the logged in user that are still "interested".
 GET {{baseUrl}}/user/requests/received
 
+### Get my connections  (GET /user/connections)
+# Needs the login cookie, so send "login" first.
+# Returns the requests with status "accepted" where the logged in user is the sender OR the receiver.
+GET {{baseUrl}}/user/connections
+
 ### Logout  (POST /logout)
 POST {{baseUrl}}/logout
 
