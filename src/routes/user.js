@@ -4,6 +4,7 @@ const express = require('express');
 const userRouter = express.Router()
 const { userAuth } = require("../middlewares/auth")
 const ConnectionRequest = require("../models/connectionRequest")
+const { User } = require("../models/user")
 
 const USER_SAFE_DATA = "firstName lastName photoUrl age gender"
 
@@ -103,9 +104,18 @@ userRouter.get("/feed", userAuth, async (req, res) => {
         })
         console.warn(hideUsersFromFeed)
 
+        const users = await User.find({
+            $and:[
+                {_id: { $nin: Array.from(hideUsersFromFeed) }},
+                {_id: { $ne: loggedInUser._id }}, // which allows logged in user
+            ]
+            
+        })
+
         res.json({
             connectionRequests: connectionRequests,
-            hideUsersFromFeed: hideUsersFromFeed
+            hideUsersFromFeed: hideUsersFromFeed,
+            users:users
         })
     } catch (error) {
         res.status(400).send("error: " + error.message)
