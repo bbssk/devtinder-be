@@ -158,6 +158,11 @@ GET {{baseUrl}}/user/requests/received
 # Returns the requests with status "accepted" where the logged in user is the sender OR the receiver.
 GET {{baseUrl}}/user/connections
 
+### Get feed with pagination  (GET /feed?page=2&limit=3)
+# Needs the login cookie, so send "login" first.
+# page and limit are query params, read in the route with req.query
+GET {{baseUrl}}/feed?page=2&limit=3
+
 ### Logout  (POST /logout)
 POST {{baseUrl}}/logout
 

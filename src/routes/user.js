@@ -92,6 +92,7 @@ userRouter.get("/feed", userAuth, async (req, res) => {
         //query params are in req.query (req.params is only for :name parts of the path)
         const page = parseInt(req.query.page) || 1
         const limit = parseInt(req.query.limit) || 10
+        const skip =(page-1)* limit
         // get connectionRequests sent +received
         // NOTE: this includes self user as well if atleast one request is made otherwise implement separately bro
         // populate is just used for developer comfort
@@ -116,10 +117,10 @@ userRouter.get("/feed", userAuth, async (req, res) => {
                 {_id: { $ne: loggedInUser._id }}, // which allows logged in user
             ]
             
-        }).select(USER_SAFE_DATA)
+        }).select(USER_SAFE_DATA).skip(skip).limit(limit)
 
         res.json({
-            connectionRequests: connectionRequests,
+            //connectionRequests: connectionRequests,
             //hideUsersFromFeed: hideUsersFromFeed,
             users:users
         })
