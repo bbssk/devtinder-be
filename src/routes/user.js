@@ -56,6 +56,7 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
     }
 })
 
+//page and limit come from the query string: /feed?page=1&limit=10 (not part of the route path)
 userRouter.get("/feed", userAuth, async (req, res) => {
     try {
         // user should not see his own card
@@ -87,6 +88,10 @@ userRouter.get("/feed", userAuth, async (req, res) => {
         // So a person leaves the feed as soon as any request exists between the two of us
 
         const loggedInUser = req.user;
+        delete req.query
+        //query params are in req.query (req.params is only for :name parts of the path)
+        const page = parseInt(req.query.page) || 1
+        const limit = parseInt(req.query.limit) || 10
         // get connectionRequests sent +received
         // NOTE: this includes self user as well if atleast one request is made otherwise implement separately bro
         // populate is just used for developer comfort
