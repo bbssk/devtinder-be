@@ -1,0 +1,141 @@
+@baseUrl = http://localhost:3000
+
+### Signup - Samantha  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Samantha",
+    "lastName": "Ruth Prabhu",
+    "emailId": "samantha@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "dancing"],
+    "age": 38,
+    "gender": "female"
+}
+
+### Signup - Rashmika Mandanna  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Rashmika",
+    "lastName": "Mandanna",
+    "emailId": "rashmika@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "dancing"],
+    "age": 29,
+    "gender": "female"
+}
+
+### Signup - Anushka Shetty  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Anushka",
+    "lastName": "Shetty",
+    "emailId": "anushka@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "yoga"],
+    "age": 43,
+    "gender": "female"
+}
+
+### Signup - Pooja Hegde  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Pooja",
+    "lastName": "Hegde",
+    "emailId": "poojahegde@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "modeling"],
+    "age": 34,
+    "gender": "female"
+}
+
+### Signup - Kajal Aggarwal  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Kajal",
+    "lastName": "Aggarwal",
+    "emailId": "kajal@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "singing"],
+    "age": 40,
+    "gender": "female"
+}
+
+### Signup - Sai Pallavi  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Sai Pallavi",
+    "lastName": "Senthamarai",
+    "emailId": "saipallavi@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "dancing"],
+    "age": 33,
+    "gender": "female"
+}
+
+### Signup - Tamannaah Bhatia  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Tamannaah",
+    "lastName": "Bhatia",
+    "emailId": "tamannaah@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "dancing"],
+    "age": 36,
+    "gender": "female"
+}
+
+### Signup - Shruti Haasan  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Shruti",
+    "lastName": "Haasan",
+    "emailId": "shruti@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "music"],
+    "age": 39,
+    "gender": "female"
+}
+
+### Signup - Keerthy Suresh  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Keerthy",
+    "lastName": "Suresh",
+    "emailId": "keerthy@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "dancing"],
+    "age": 33,
+    "gender": "female"
+}
+
+### Signup - Nayanthara  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Nayanthara",
+    "lastName": "Kurian",
+    "emailId": "nayanthara@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "production"],
+    "age": 40,
+    "gender": "female"
+}
