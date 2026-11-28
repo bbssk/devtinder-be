@@ -111,7 +111,7 @@ userRouter.get("/feed", userAuth, async (req, res) => {
                 {_id: { $ne: loggedInUser._id }}, // which allows logged in user
             ]
             
-        })
+        }).select(USER_SAFE_DATA)
 
         res.json({
             connectionRequests: connectionRequests,
