@@ -92,7 +92,7 @@ userRouter.get("/feed", userAuth, async (req, res) => {
                 { fromUserId: loggedInUser._id },
                 { toUserId: loggedInUser._id }
             ]
-        }).select(["fromUserId", "toUserId"]).populate("fromUserId, firstName").populate("toUserId, firstName")
+        }).select(["fromUserId", "toUserId"]).populate("fromUserId", "firstName").populate("toUserId", "firstName")
         res.send(connectionRequests)
     } catch (error) {
         res.status(400).send("error: " + error.message)
