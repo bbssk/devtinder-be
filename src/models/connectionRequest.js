@@ -27,6 +27,11 @@ const connectionRequestSchema = new mongoose.Schema(
     }
 );
 
+//compound index: one index on 2 fields together, speeds up searches that use both fromUserId and toUserId
+//e.g. checking if a request between two users already exists
+//field order matters: it also helps searches by fromUserId alone, but not by toUserId alone
+connectionRequestSchema.index({fromUserId:1, toUserId:1})
+
 connectionRequestSchema.pre("save", function(){
     const connectionRequest=this;
     //check if from and to user IDs are same
