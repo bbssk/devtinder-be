@@ -98,9 +98,10 @@ userRouter.get("/feed", userAuth, async (req, res) => {
         }).select(["fromUserId", "toUserId"]).populate("fromUserId", "firstName").populate("toUserId", "firstName")
 
         const hideUsersFromFeed = new Set()
-        connectionRequests.forEach((req) => {
-            hideUsersFromFeed.add(req.fromUserId.toString())
-            hideUsersFromFeed.add(req.toUserId.toString())
+        connectionRequests.forEach((row) => {
+            //fromUserId/toUserId are populated (full user objects), so take ._id to get just the id
+            hideUsersFromFeed.add(row.fromUserId._id.toString())
+            hideUsersFromFeed.add(row.toUserId._id.toString())
         })
         console.warn(hideUsersFromFeed)
 
@@ -114,7 +115,7 @@ userRouter.get("/feed", userAuth, async (req, res) => {
 
         res.json({
             connectionRequests: connectionRequests,
-            hideUsersFromFeed: hideUsersFromFeed,
+            //hideUsersFromFeed: hideUsersFromFeed,
             users:users
         })
     } catch (error) {
