@@ -68,6 +68,11 @@ const userSchema = new mongoose.Schema({
     })
 
 
+//compound index: one index on 2 fields together, speeds up searches that use both firstName and lastName
+//e.g. searching users by full name
+//field order matters: it also helps searches by firstName alone, but not by lastName alone
+userSchema.index({firstName:1, lastName:1})
+
 //dont put arrow function it breaks the things as keyword inside arrow function wont work
 userSchema.methods.getJWT = async function () {
     const user= this;
