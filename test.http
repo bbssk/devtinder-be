@@ -15,6 +15,90 @@ Content-Type: application/json
     "gender":"male"
 }
 
+### Signup - Pawan Kalyan  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Pawan",
+    "lastName": "Kalyan",
+    "emailId": "pawankalyan@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "martial arts"],
+    "age": 52,
+    "gender": "male"
+}
+
+### Signup - Mahesh Babu  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Mahesh",
+    "lastName": "Babu",
+    "emailId": "maheshbabu@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "dancing"],
+    "age": 50,
+    "gender": "male"
+}
+
+### Signup - Prabhas  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Prabhas",
+    "lastName": "Raju",
+    "emailId": "prabhas@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "action"],
+    "age": 46,
+    "gender": "male"
+}
+
+### Signup - Jr NTR  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Jr NTR",
+    "lastName": "Nandamuri",
+    "emailId": "jrntr@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "dancing"],
+    "age": 42,
+    "gender": "male"
+}
+
+### Signup - Allu Arjun  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Allu",
+    "lastName": "Arjun",
+    "emailId": "alluarjun@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "dancing"],
+    "age": 43,
+    "gender": "male"
+}
+
+### Signup - Ram Charan  (POST /signup)
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Ram Charan",
+    "lastName": "Konidela",
+    "emailId": "ramcharan@example.com",
+    "password": "Abcd@1234!!!",
+    "skills": ["acting", "horse riding"],
+    "age": 40,
+    "gender": "male"
+}
+
 ### login  (POST /login)
 # @name login
 POST {{baseUrl}}/login

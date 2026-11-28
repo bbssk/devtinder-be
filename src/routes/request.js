@@ -70,5 +70,19 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
 })
 
 
+requestRouter.post("/request/review/:status/:requestId", userAuth, async (req,res)=>{
+    try {
+        const loggedInUser= req.user;
+        
+
+
+    } catch (error) {
+        res.status(400).send("error: " + error.message)
+    }
+    
+
+})
+
+
 
 module.exports = requestRouter
