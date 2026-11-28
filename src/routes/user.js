@@ -87,13 +87,26 @@ userRouter.get("/feed", userAuth, async (req, res) => {
 
         const loggedInUser = req.user;
         // get connectionRequests sent +received
+        // NOTE: this includes self user as well if atleast one request is made otherwise implement separately bro
+        // populate is just used for developer comfort
         const connectionRequests = await ConnectionRequest.find({
             $or: [
                 { fromUserId: loggedInUser._id },
                 { toUserId: loggedInUser._id }
             ]
         }).select(["fromUserId", "toUserId"]).populate("fromUserId", "firstName").populate("toUserId", "firstName")
-        res.send(connectionRequests)
+
+        const hideUsersFromFeed = new Set()
+        connectionRequests.forEach((req) => {
+            hideUsersFromFeed.add(req.fromUserId.toString())
+            hideUsersFromFeed.add(req.toUserId.toString())
+        })
+        console.warn(hideUsersFromFeed)
+
+        res.json({
+            connectionRequests: connectionRequests,
+            hideUsersFromFeed: hideUsersFromFeed
+        })
     } catch (error) {
         res.status(400).send("error: " + error.message)
     }
