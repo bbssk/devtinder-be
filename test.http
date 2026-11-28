@@ -15,6 +15,20 @@ Content-Type: application/json
     "gender":"male"
 }
 
+### signup
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+    "firstName": "Bhargav",
+    "lastName": "Buddana",
+    "emailId": "bbsskrishna@gmail.com",
+    "password": "Abcd@1234!!!",
+    "skills":["fiori", "cap"],
+    "age":26,
+    "gender":"male"
+}
+
 ### Signup - Pawan Kalyan  (POST /signup)
 POST {{baseUrl}}/signup
 Content-Type: application/json
