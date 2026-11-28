@@ -30,10 +30,10 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
             )
         }
 
-        const toUser=await User.findById(toUserId)
-        if(!toUser){
+        const toUser = await User.findById(toUserId)
+        if (!toUser) {
             return res.status(404).json({
-                message:"user not found"
+                message: "user not found"
             })
         }
 
@@ -60,7 +60,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
         })
         const data = await connectionRequest.save()
         res.json({
-            message: req.user.firstName + "is" + status + " in "+ toUser.firstName,
+            message: req.user.firstName + "is" + status + " in " + toUser.firstName,
             data
         })
     } catch (error) {
@@ -70,16 +70,47 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
 })
 
 
-requestRouter.post("/request/review/:status/:requestId", userAuth, async (req,res)=>{
+requestRouter.post("/request/review/:status/:requestId", userAuth, async (req, res) => {
     try {
-        const loggedInUser= req.user;
-        
+        const loggedInUser = req.user;
+        const { status, requestId } = req.data.params
+
+        const allowedStatus = ["accepted", "rejected"]
+        if (!allowedStatus.includes(status)) {
+            return res.status(400).json({
+                message: "Invalid Status"
+            })
+        }
+
+        const connectionRequest = await ConnectionRequest.findOne({
+            _id: requestId,
+            toUserId: loggedInUser._id,
+            status: "interested"
+        });
+        if (!connectionRequest) {
+            return res.status(400).json({
+                message: "connection request not found"
+            })
+        }
+
+
+        connectionRequest.status = status;
+        const resp = await connectionRequest.save();
+        res.json({
+            message: "connection request " + status,
+            data: resp
+        })
+
+        //Bhargav to Elon
+        // loggedin= touserid
+        //status should always be interested
+        // requestid shild be valid and present in db
 
 
     } catch (error) {
         res.status(400).send("error: " + error.message)
     }
-    
+
 
 })
 

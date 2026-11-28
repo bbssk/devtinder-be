@@ -128,6 +128,12 @@ Content-Type: application/json
 # toUserId: replace with the _id of another existing user
 POST {{baseUrl}}/request/send/interested/PUT_TO_USER_ID_HERE
 
+### Review connection request  (POST /request/review/:status/:requestId)
+# Log in as the RECEIVER of the request (the user the request was sent to), not the sender.
+# status: accepted or rejected
+# requestId: replace with the _id of the connection request (returned as data._id by the send request)
+POST {{baseUrl}}/request/review/accepted/PUT_REQUEST_ID_HERE
+
 ### Logout  (POST /logout)
 POST {{baseUrl}}/logout
 
